@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
 
-function App() {
+import useFetch from "./useFetch";
+import style from "./components/MsgBody.syle.css";
+const App = () => {
+  const { data, error, loading, dataElement } = useFetch(
+    "https://jsonplaceholder.typicode.com/posts"
+  );
+
+  const loadingMsg = <h1>Data is loading!!!Please Wait!</h1>;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="intro_appJs">
+        <h1>
+          Fething Data From{" "}
+          <a href="https://jsonplaceholder.typicode.com/posts">This!!</a>
+        </h1>
+      </div>
+      {error && <p> 404 !! Invalid !! Error</p>}
+      {loading && <h1>Hello</h1>}
+      {dataElement}
+      <div>{loading && loadingMsg}</div>
     </div>
   );
-}
+};
 
 export default App;
